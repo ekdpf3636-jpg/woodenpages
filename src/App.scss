@@ -1,0 +1,783 @@
+// =====================
+// Global Reset & Theme
+// =====================
+* {
+  margin: 0;
+  padding: 0;
+  font-family: __Pretendard_dc5901, __Pretendard_Fallback_dc5901;
+}
+
+:root {
+  --siteMainColor: #a67b5b;
+  --bgColor: rgb(245, 245, 245);
+  --whiteFont: #fff;
+  --blackFont: #000;
+  --visualColor: #333;
+  --borderColor: #555;
+  --varColor: #888;
+  --addColor: #2196F3;
+  --fixColor: #FF9800;
+  --delColor: #E53935;
+}
+
+body { overflow: hidden; }
+
+@keyframes direction {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(180deg); }
+}
+
+// =====================
+// Base Elements
+// =====================
+li { list-style: none; float: left; }
+a { text-decoration: none; color: inherit; display: block; }
+h2 { display: block; width: calc(100% - 10%); text-indent: calc(-15%); }
+h3 { display: block; font-size: 23px; }
+
+li.selected {
+  font-weight: 600;
+  color: var(--blackFont);
+}
+
+// =====================
+// App Root
+// =====================
+#root {
+  width: 100%;
+  height: 100vh;      /* 헤더 고정 레이아웃 전제 */
+  min-height: 900px;
+
+  .MAIN_WRAPPER {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// =====================
+// Header
+// =====================
+header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 15%;
+  border-bottom: 1px solid;
+  position: relative;
+  overflow: visible;
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    height: 100%;
+
+    h1 {
+      height: inherit;
+
+      a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: inherit;
+        height: inherit;
+        overflow: hidden;
+      }
+
+      .mainLogo {
+        max-width: 200px;
+        max-height: 125px;
+        object-fit: contain;
+      }
+    }
+  }
+
+  nav {
+    flex: 1;
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+
+    .header-ul {
+      width: 70%;
+      height: inherit;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 70px;
+      font-size: 2.3rem;
+    }
+
+    .side-tab {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20%;
+      min-width: 170px;
+
+      .user-content {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 12vw;
+        height: 100%;
+        padding: 0 5%;
+        background-color: var(--bgColor);
+        border: 1px solid var(--borderColor);
+
+        p {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 10px;
+          text-align: center;
+
+          .loginbtn {
+            cursor: pointer;
+            background-color: var(--bgColor);
+            padding: 8px 0;
+            border-radius: 15px;
+            border: 1px solid var(--borderColor);
+          }
+        }
+      }
+
+      .hamburger {
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 7%;
+        width: 28%;
+        height: 28%;
+
+        span {
+          overflow: visible;
+          display: block;
+          width: 100%;
+          height: calc((100% - 2*7%) / 3);
+          position: relative;
+
+          &::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 75%;
+            background-color: var(--blackFont);
+            border-radius: 15px;
+            position: absolute;
+            top: 0; left: 0;
+            transition: transform 0.5s ease;
+          }
+        }
+
+        &:hover span::after { animation: direction 0.5s linear forwards; }
+        span:nth-child(1)::after { animation-duration: 0.5s; }
+        span:nth-child(2)::after { animation-duration: 0.6s; }
+        span:nth-child(3)::after { animation-duration: 0.7s; }
+
+        .hamburger:hover span::after { transform: rotate(180deg); }
+      }
+    }
+  }
+
+  .guidemenu-wrapper {
+    pointer-events: none;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0; right: 0;
+    background-color: white;
+    z-index: 99999;
+    opacity: 0;
+    transition: all 1s ease-in-out;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.50));
+
+    &.show { pointer-events: all; opacity: 1; }
+
+    .guidemenu-title {
+      width: 100%;
+      font-size: 30px;
+      line-height: 70px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .guidemenu-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      gap: 10vw;
+      padding: 5vw 3vw 0 3vw;
+      box-sizing: border-box;
+
+      .guidemenu-lists {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.65rem;
+        font-size: 23px;
+
+        h3 { font-size: 28px; }
+
+        a {
+          display: block;
+          position: relative;
+
+          &:hover::after {
+            text-decoration: underline;
+            opacity: 1;
+            transition: all 0.8s 0s ease-in-out;
+          }
+
+          &::after {
+            content: "";
+            display: block;
+            opacity: 0;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: black;
+            position: absolute;
+            top: 1px; right: -15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// =====================
+// Aside
+// =====================
+.main_aside {
+  width: 15%;
+  height: 100%;
+  border-right: 1px solid;
+
+  .main_article {
+    width: 100%;
+
+    .aside-ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      font-size: 25px;
+    }
+  }
+}
+
+.aside-ul > li, .header-ul > li {
+  position: relative;
+  color: var(--borderColor);
+
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    position: absolute;
+    bottom: 0; left: 0;
+    transform: scaleX(0);
+    transition: all 1s 0s ease-in-out;
+  }
+
+  &.selected::after { transform: scaleX(1); }
+}
+
+// =====================
+// Main Content
+// =====================
+.main_content {
+  display: flex;
+  width: 100%;
+  height: calc(100% - 15%);
+
+  .main_body {
+    flex: 1;
+    height: 100%;
+    /* ✅ 메인 영역 자체 스크롤 (섹션이 길어질 때) */
+    overflow: auto;
+
+    /* (구형) 기존 유연 그리드 - 남겨두되, 아래 grid 오버라이드가 우선 적용됨 */
+    .gridbox {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      height: 100%;
+
+      .grid {
+        width: 50%;
+        height: 50%;
+
+        .card { width: 100%; }
+
+        &.bottom { width: 100%; }
+      }
+    }
+  }
+}
+
+// =====================
+// Dashboard Layout Override (JSX 수정 없이 적용)
+// =====================
+/* gridbox를 2열 Grid로 전환 (기존 flex 덮어쓰기) */
+.main_content .main_body .gridbox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;          /* 2열 */
+  grid-auto-rows: minmax(360px, auto);     /* 각 칸 최소 높이 */
+  gap: 20px;
+  width: 100%;
+  height: auto;                             /* 내용만큼 늘어남 */
+  padding-bottom: 24px;
+  box-sizing: border-box;
+}
+
+/* 상단 예측: 2칸 모두 차지 */
+.main_content .main_body .gridbox .grid-forecast {
+  grid-column: 1 / -1;                     /* 가로 전체 */
+  min-height: 380px;
+}
+
+/* 하단 두 칸은 자동으로 좌/우 배치됨 (두 번째, 세 번째 .grid) */
+.main_content .main_body .gridbox .grid {
+  min-height: 360px;
+}
+
+/* 기존 .grid.bottom { width:100% } 규칙이 grid 레이아웃을 망치지 않도록 의미 제거 */
+.main_content .main_body .gridbox .grid.bottom {
+  width: auto;                              /* (grid에서 width는 의미 거의 없음) */
+  min-height: 360px;
+}
+
+/* 카드/차트가 잘려 보이지 않도록 */
+.main_content .main_body .gridbox .grid,
+.main_content .main_body .gridbox .grid > * {
+  overflow: visible;
+}
+
+/* 차트 컨테이너가 명확한 높이를 참조할 수 있도록(옵션) */
+.main_content .main_body .gridbox .grid .card,
+.main_content .main_body .gridbox .grid > .card {
+  min-height: 360px;
+}
+
+/* 반응형: 태블릿 이하에서 세로 스택 */
+@media (max-width: 1024px) {
+  .main_content .main_body .gridbox {
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(320px, auto);
+  }
+  .main_content .main_body .gridbox .grid-forecast { grid-column: auto; }
+}
+
+// =====================
+// Page Utilities
+// =====================
+.page-wrapper {
+  height: calc(100vh - 17.5%);
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+/* Tables */
+.table-wrapper {
+  width: 100%;
+  height: 60%;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  &.stock { height: 32%; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: lightgray;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 13px 10px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;          /* 넘치는 글자 숨김 */
+      text-overflow: ellipsis;   /* 넘치는 글자 ... 처리 */
+    }
+
+    td { text-align: center; }
+  }
+}
+
+/* Search bar */
+.top-searchbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+
+  input {
+    height: 30px;
+    border-radius: 10px;
+    text-indent: 10px;
+  }
+
+  .refresh {
+    height: 38px;
+    position: static;
+    line-height: 10px;
+  }
+}
+/* ================================
+   대시보드 레이아웃 강제 오버라이드
+   (JSX 수정 없음)
+   ================================ */
+
+/* 스크롤 허용 */
+body { overflow: auto !important; }
+.main_content .main_body { overflow: auto !important; }
+
+/* gridbox를 그리드로 전환 + 영역 정의 */
+.main_content .main_body .gridbox {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-template-areas:
+    "forecast forecast"
+    "monthly  item" !important;
+  grid-auto-rows: minmax(360px, auto) !important;
+  gap: 20px !important;
+  width: 100% !important;
+  height: auto !important;
+  padding-bottom: 24px !important;
+  box-sizing: border-box !important;
+}
+
+/* 상단: 예측(2칸) */
+.main_content .main_body .gridbox > .grid-forecast {
+  grid-area: forecast !important;
+  min-height: 380px !important;
+  /* 혹시 내부 차트가 clip되면 카드/차트도 visible */
+  overflow: visible !important;
+}
+
+/* 하단 좌: 월별 매출 (두 번째 .grid) */
+.main_content .main_body .gridbox > .grid:nth-of-type(2) {
+  grid-area: monthly !important;
+  min-height: 360px !important;
+  overflow: visible !important;
+}
+
+/* 하단 우: 품목별 (세 번째 .grid, .bottom 포함) */
+.main_content .main_body .gridbox > .grid:nth-of-type(3),
+.main_content .main_body .gridbox > .grid.bottom {
+  grid-area: item !important;
+  min-height: 360px !important;
+  overflow: visible !important;
+}
+
+/* 기존 flex 시절 width 규칙 무력화 */
+.main_content .main_body .gridbox > .grid,
+.main_content .main_body .gridbox > .grid.bottom {
+  width: auto !important;   /* grid에서 width 100%로 잡히는 문제 방지 */
+  height: auto !important;
+}
+
+/* 카드/차트 툴팁 잘림 방지 */
+.main_content .main_body .gridbox > .grid .card,
+.main_content .main_body .gridbox > .grid > .card {
+  min-height: 360px !important;
+  overflow: visible !important;
+}
+
+/* 반응형: 1024px 이하에서는 세로 스택 */
+@media (max-width: 1024px) {
+  .main_content .main_body .gridbox {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "forecast"
+      "monthly"
+      "item" !important;
+    grid-auto-rows: minmax(320px, auto) !important;
+  }
+}
+/* ================================
+   대시보드 레이아웃 강제 오버라이드 (JSX 수정 無)
+   ================================ */
+
+/* 스크롤 허용 */
+body { overflow: auto !important; }
+
+/* ---- 핵심: gridbox를 2열 Grid로 전환 ---- */
+.gridbox {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-template-areas:
+    "forecast forecast"
+    "monthly  item" !important;
+  grid-auto-rows: minmax(360px, auto) !important;
+  gap: 20px !important;
+  width: 100% !important;
+  height: auto !important;
+  padding-bottom: 24px !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+/* 상단: 예측(2칸 전체) — grid-forecast가 반드시 전체를 차지 */
+.gridbox > .grid-forecast {
+  grid-area: forecast !important;
+  min-height: 380px !important;
+  overflow: visible !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* 하단 좌: 월별 매출 (두 번째 .grid) */
+.gridbox > .grid:nth-of-type(2) {
+  grid-area: monthly !important;
+  min-height: 360px !important;
+  overflow: visible !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* 하단 우: 월별 품목별 (세 번째 .grid 또는 .grid.bottom) */
+.gridbox > .grid:nth-of-type(3),
+.gridbox > .grid.bottom {
+  grid-area: item !important;
+  min-height: 360px !important;
+  overflow: visible !important;
+  width: auto !important;   /* 기존 width:100% 제거 효과 */
+  height: auto !important;
+}
+
+/* 기존 flex 시대의 규칙 무력화(겹침 방지) */
+.gridbox > .grid { width: auto !important; height: auto !important; }
+.gridbox > .grid .card, .gridbox > .grid > .card {
+  min-height: 360px !important;
+  overflow: visible !important; /* 툴팁/범례 잘림 방지 */
+}
+
+/* 반응형: 태블릿 이하 1열 스택 */
+@media (max-width: 1024px) {
+  .gridbox {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "forecast"
+      "monthly"
+      "item" !important;
+    grid-auto-rows: minmax(320px, auto) !important;
+  }
+}
+
+/* 선택 박스/툴팁 살짝 여백 */
+.selector-row { margin-bottom: 12px !important; }
+
+/* ================================
+   대시보드 레이아웃 오버라이드 (JSX 수정 없이)
+   현재 DOM: .dashboard-grid > .card.top-left | .top-right | .bottom-left | .bottom-right
+   ================================ */
+
+/* 스크롤 켜기 */
+body { overflow: auto !important; }
+.main_content .main_body { overflow: auto !important; }
+
+/* 2열 그리드 기본 레이아웃 */
+.dashboard-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-template-rows: auto auto !important;
+  gap: 20px !important;
+  width: 100% !important;
+  height: auto !important;
+  padding-bottom: 24px !important;
+  box-sizing: border-box !important;
+  align-content: start !important;
+}
+
+/* 카드 기본 */
+.dashboard-grid .card {
+  min-height: 360px !important;
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  overflow: visible !important; /* 차트 툴팁 잘림 방지 */
+}
+
+/* ---------- 상단 예측 ---------- */
+/* 두 번째 예측(.top-right)은 숨김 */
+.dashboard-grid .top-right {
+  display: none !important;
+}
+
+/* 첫 번째 예측(.top-left)이 가로 2칸 모두 차지 */
+.dashboard-grid .top-left {
+  grid-column: 1 / -1 !important;  /* 1~2칸 span */
+  min-height: 380px !important;
+}
+
+/* ---------- 하단 통계 좌/우 ---------- */
+.dashboard-grid .bottom-left {
+  grid-column: 1 / 2 !important;   /* 좌 */
+}
+.dashboard-grid .bottom-right {
+  grid-column: 2 / 3 !important;   /* 우 */
+}
+
+/* 반응형: 태블릿 이하에서 세로 스택 */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    gap: 16px !important;
+  }
+  .dashboard-grid .top-left { grid-column: 1 / 2 !important; }
+  .dashboard-grid .bottom-left,
+  .dashboard-grid .bottom-right { grid-column: 1 / 2 !important; }
+}
+
+/* (안전장치) 구 레이아웃 규칙 무력화 */
+.gridbox, .gridbox .grid, .gridbox .grid.bottom { width: auto !important; height: auto !important; }
+/* ================================
+   스크롤 단일화: 메인 영역만 스크롤
+   ================================ */
+
+/* 1) 바디 스크롤 끄기 (중복 스크롤 방지) */
+html, body { overflow: hidden !important; }
+
+/* 2) 레이아웃 높이 정의: 헤더(15%) 제외 나머지 영역에만 스크롤 */
+#root { height: 100vh !important; }
+.main_content { height: calc(100vh - 15%) !important; }
+.main_content .main_body {
+  height: 100% !important;
+  overflow: auto !important;                 /* ✅ 스크롤은 여기서만 */
+  -webkit-overflow-scrolling: touch;         /* 모바일 관성 스크롤 */
+}
+
+/* 3) 내부 컨테이너들은 스크롤 비활성화 (중첩 방지) */
+.dashboard-grid,
+.gridbox,
+.gridbox .grid,
+.gridbox .grid.bottom {
+  overflow: visible !important;              /* 차트 툴팁 잘림 방지 */
+}
+
+/* 4) 현재 레이아웃 강제(상단 예측 1개 + 하단 좌/우) */
+.dashboard-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-template-rows: auto auto !important;
+  gap: 20px !important;
+  width: 100% !important;
+  height: auto !important;
+  padding-bottom: 24px !important;
+  align-content: start !important;
+}
+
+.dashboard-grid .card { 
+  min-height: 360px !important;
+  background: #fff; border-radius: 12px; padding: 10px;
+  overflow: visible !important;
+}
+
+/* 상단 예측 1개만 표시 */
+.dashboard-grid .top-right { display: none !important; }
+.dashboard-grid .top-left  { grid-column: 1 / -1 !important; min-height: 380px !important; }
+
+/* 하단 좌/우 고정 */
+.dashboard-grid .bottom-left  { grid-column: 1 / 2 !important; }
+.dashboard-grid .bottom-right { grid-column: 2 / 3 !important; }
+
+/* 반응형: 태블릿 이하에서 1열 스택 */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    gap: 16px !important;
+  }
+  .dashboard-grid .top-left,
+  .dashboard-grid .bottom-left,
+  .dashboard-grid .bottom-right { grid-column: 1 / 2 !important; }
+}
+/* ================================
+   판매거래처 리스트 페이지 전용 패치
+   (JSX 수정 없이 버튼 위치/빈 여백 해결)
+   ================================ */
+
+/* 0) 상단 헤더 아래 기본 여백 살짝 */
+.page-wrapper {
+  padding-top: 1rem;
+}
+
+/* 1) 뒤로가기 버튼이 떠다니는 문제 방지
+   - 기존 .backbtn-wrapper: float/absolute → 페이지에서만 해제 */
+.page-wrapper .backbtn-wrapper {
+  float: none !important;
+  width: auto !important;
+  height: auto !important;
+  position: static !important;
+  display: inline-block !important;
+  margin-bottom: .5rem !important;
+}
+
+/* 2) 개별 버튼(뒤로가기/새로고침) 포지션을 '정상 흐름'으로
+   - 공용 버튼 SCSS가 position:absolute; right/left/bottom을 주기 때문에
+     이 페이지에서는 static 으로 덮어써서 라인 정렬이 무너지지 않게 함 */
+.page-wrapper button.backbtn,
+.page-wrapper button.refresh {
+  position: static !important;
+  right: auto !important;
+  left:  auto !important;
+  bottom:auto !important;
+  transform: none !important;
+  margin-right: .5rem;      /* 버튼 사이 간격 */
+}
+
+/* 3) 상단 검색줄 정렬 고정 (버튼/검색 인풋이 줄 바꿈되거나 겹치지 않도록) */
+.page-wrapper .top-searchbar {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 12px 0 8px !important;
+  height: auto !important;   /* 고정 높이로 인한 밀림 방지 */
+}
+
+
+/* 5) (선택) 데이터가 없으면 테이블 자체를 숨김
+   - Chrome/Edge 지원 :has 활용. 필요 없으면 주석 처리해도 됨 */
+.page-wrapper .table-wrapper:has(tbody:empty) {
+  display: none !important;
+}
+/* 판매거래처 리스트 페이지: 제목 가운데 정렬(버튼/왼쪽 여백 영향 제거) */
+.page-wrapper:has(> .top-searchbar) > h2 {
+  width: 100% !important;     /* 전역 h2의 calc(100% - 10%) 해제 */
+  text-indent: 0 !important;  /* 전역 h2의 음수 들여쓰기 해제 */
+  text-align: center !important;
+  margin: 8px 0 12px !important;
+  clear: both;                 /* 앞쪽 float 요소 영향 제거(안전장치) */
+}
+/* 재고 페이지: 아래 "생산완료 리스트" 제목 가운데 정렬 */
+.page-wrapper:has(> h2 + .top-searchbar + .table-wrapper.stock) > h3 {
+  width: 100%;
+  text-align: center;
+  margin: 16px 0 10px;
+  clear: both;        /* 혹시 앞 요소에 float 있으면 영향 제거 */
+}
+
