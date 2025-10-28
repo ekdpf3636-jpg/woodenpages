@@ -1,5 +1,6 @@
 {
   "files": {
+    "main.css": "/woodenpages/static/css/main.196c10d0.css",
     "main.js": "/woodenpages/static/js/main.ff7859d1.js",
     "static/css/613.7e140d32.chunk.css": "/woodenpages/static/css/613.7e140d32.chunk.css",
     "static/js/613.fff90ae2.chunk.js": "/woodenpages/static/js/613.fff90ae2.chunk.js",
@@ -35,6 +36,7 @@
     "static/media/WoodenMainLogo.png": "/woodenpages/static/media/WoodenMainLogo.bb189376726013898745.png",
     "static/media/success.png": "/woodenpages/static/media/success.89ae05f14ca7878524b4.png",
     "index.html": "/woodenpages/index.html",
+    "main.196c10d0.css.map": "/woodenpages/static/css/main.196c10d0.css.map",
     "main.ff7859d1.js.map": "/woodenpages/static/js/main.ff7859d1.js.map",
     "613.7e140d32.chunk.css.map": "/woodenpages/static/css/613.7e140d32.chunk.css.map",
     "613.fff90ae2.chunk.js.map": "/woodenpages/static/js/613.fff90ae2.chunk.js.map",
@@ -69,6 +71,7 @@
     "76.a9f93de1.chunk.js.map": "/woodenpages/static/js/76.a9f93de1.chunk.js.map"
   },
   "entrypoints": [
+    "static/css/main.196c10d0.css",
     "static/js/main.ff7859d1.js"
   ]
 }
