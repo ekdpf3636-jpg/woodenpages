@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/woodenpages/static/css/main.53a4c56a.css",
-    "main.js": "/woodenpages/static/js/main.08d608e4.js",
+    "main.js": "/woodenpages/static/js/main.e8a49ecb.js",
     "static/css/328.876feadd.chunk.css": "/woodenpages/static/css/328.876feadd.chunk.css",
     "static/js/328.db768e99.chunk.js": "/woodenpages/static/js/328.db768e99.chunk.js",
     "static/js/428.efcc7696.chunk.js": "/woodenpages/static/js/428.efcc7696.chunk.js",
@@ -27,7 +27,7 @@
     "static/media/success.png": "/woodenpages/static/media/success.89ae05f14ca7878524b4.png",
     "index.html": "/woodenpages/index.html",
     "main.53a4c56a.css.map": "/woodenpages/static/css/main.53a4c56a.css.map",
-    "main.08d608e4.js.map": "/woodenpages/static/js/main.08d608e4.js.map",
+    "main.e8a49ecb.js.map": "/woodenpages/static/js/main.e8a49ecb.js.map",
     "328.876feadd.chunk.css.map": "/woodenpages/static/css/328.876feadd.chunk.css.map",
     "328.db768e99.chunk.js.map": "/woodenpages/static/js/328.db768e99.chunk.js.map",
     "428.efcc7696.chunk.js.map": "/woodenpages/static/js/428.efcc7696.chunk.js.map",
@@ -52,6 +52,6 @@
   },
   "entrypoints": [
     "static/css/main.53a4c56a.css",
-    "static/js/main.08d608e4.js"
+    "static/js/main.e8a49ecb.js"
   ]
 }
